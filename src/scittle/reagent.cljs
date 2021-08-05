@@ -7,13 +7,16 @@
 (def rns (sci/create-ns 'reagent.core nil))
 
 (def reagent-namespace
-  {'atom (sci/copy-var r/atom rns)
-   'as-element (sci/copy-var r/as-element rns)})
+  {'argv (sci/copy-var r/argsv rns)
+   'as-element (sci/copy-var r/as-element rns)
+   'atom (sci/copy-var r/atom rns)
+   'create-class (sci/copy-var r/create-class rns)})
 
 (def rdns (sci/create-ns 'reagent.dom nil))
 
 (def reagent-dom-namespace
-  {'render (sci/copy-var rdom/render rdns)})
+  {'dom-node (sci/copy-var rdom/dom-node rdns)
+   'render (sci/copy-var rdom/render rdns)})
 
 (scittle/register-plugin!
  ::reagent
