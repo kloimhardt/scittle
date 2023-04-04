@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="resources/public/js/scittle.js"
+            type="application/javascript"></script>
+
+    <script src="resources/public/js/scittle.emmy.js"
+            type="application/javascript"></script>
+
+    <script type="application/x-scittle">
+     (require '[emmy.env :as e :refer :all])
+
+      (defn my-alert []
+          (js/alert (str "You clicked! 8" (cos (symbol "pi")))))
+
+      (set! (.-my_alert js/window) my-alert)
+    </script>
+  </head>
+  <body>
+    <h1>Scittle</h1>
+
+    <button onclick="my_alert()">
+      Click me!
+    </button>
+
+  </body>
+</html>
