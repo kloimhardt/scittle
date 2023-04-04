@@ -7,5 +7,10 @@
   "devDependencies": {
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "dependencies": {
+    "complex.js": "2.1.1",
+    "fraction.js": "4.2.0",
+    "odex": "2.0.4"
   }
 }

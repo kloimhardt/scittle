@@ -26,6 +26,8 @@
                        :depends-on #{:scittle.reagent
                                      :scittle}}
     :scittle.cljs-ajax {:entries [scittle.cljs-ajax]
+                        :depends-on #{:scittle}}
+    :scittle.emmy {:entries [scittle.emmy]
                         :depends-on #{:scittle}}}
    :build-hooks [(shadow.cljs.build-report/hook)]
    :output-dir "resources/public/js"
