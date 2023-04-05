@@ -6,7 +6,8 @@
             [sci.core :as sci]
             [sci.impl.unrestrict]
             [scittle.impl.common :refer [cljns]]
-            [scittle.impl.error :as error]))
+            [scittle.impl.error :as error]
+            [cherry.embed :as cherry]))
 
 (set! sci.impl.unrestrict/*unrestricted* true)
 
@@ -60,6 +61,23 @@
          (error/error-handler e (:src @!sci-ctx))
          (throw e))))
 
+(defn- -eval-string-cherry [s]
+  (sci/binding [sci/ns @!last-ns]
+    (let [rdr (sci/reader s)]
+      (loop [res nil]
+        (let [form (sci/parse-next @!sci-ctx rdr)]
+          (if (= :sci.core/eof form)
+            (do
+              (vreset! !last-ns @sci/ns)
+              res)
+            (recur (cherry/eval-form form))))))))
+
+(defn ^:export eval-string-cherry [s]
+  (try (-eval-string-cherry s)
+       (catch :default e
+         (error/error-handler e (:src @!sci-ctx))
+         (throw e))))
+
 (defn register-plugin! [_plug-in-name sci-opts]
   (swap! !sci-ctx sci/merge-opts sci-opts))
 
@@ -86,27 +104,32 @@
                                     (eval-script-tags* (rest script-tags)))))]
         (.send req)))))
 
+(cherry/preserve-ns 'cljs.core)
+(cherry/preserve-ns 'clojure.string)
+
 (defn- eval-cherry-script-tags* [script-tags]
   (when-let [tag (first script-tags)]
     (if-let [text (not-empty (gobject/get tag "textContent"))]
       (let [scittle-id (str (gensym "scittle-tag-"))]
         (gobject/set tag "scittle_id" scittle-id)
         (swap! !sci-ctx assoc-in [:src scittle-id] text)
-        (sci/binding [sci/file scittle-id]
-          (eval-string text))
-        (eval-script-tags* (rest script-tags)))
+        #_(sci/binding [sci/file scittle-id]
+            (eval-string-cherry text))
+        (cherry/eval-string text)
+        (eval-cherry-script-tags* (rest script-tags)))
       (let [src (.getAttribute tag "src")
             req (js/XMLHttpRequest.)
             _ (.open req "GET" src true)
             _ (gobject/set req "onload"
                            (fn [] (this-as this
-                                    (let [response (gobject/get this "response")]
-                                      (gobject/set tag "scittle_id" src)
+                                           (let [response (gobject/get this "response")]
+                                             (gobject/set tag "scittle_id" src)
                                       ;; save source for error messages
-                                      (swap! !sci-ctx assoc-in [:src src] response)
-                                      (sci/binding [sci/file src]
-                                        (eval-string response)))
-                                    (eval-script-tags* (rest script-tags)))))]
+                                             (swap! !sci-ctx assoc-in [:src src] response)
+                                             #_(sci/binding [sci/file src]
+                                                 (eval-string-cherry response))
+                                             (cherry/eval-string response))
+                                           (eval-cherry-script-tags* (rest script-tags)))))]
         (.send req)))))
 
 (defn ^:export eval-script-tags []

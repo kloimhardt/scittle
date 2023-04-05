@@ -8,35 +8,31 @@
             type="application/javascript"></script>
 
     <script type="application/x-scittle-fork">
-     (require '[emmy.env :as e :refer :all])
-
       (defn my-alert []
-          (js/alert (str "You clicked2 (cos Pi): " (cos (symbol "pi")))))
+          (js/alert (str "You clicked Pi: " (emmy.env/tex$ (symbol "pi")))))
 
       (set! (.-my_alert js/window) my-alert)
     </script>
 
     <script type="application/x-cherry">
-     (require '[emmy.env :as e :refer :all])
+      (defn my-alert-again []
+          (js/alert (str "You clicked Pi again: " (emmy.env/tex$ (symbol "pi")))))
 
-     (defn my-alert-again []
-         (js/alert (str "You again clicked (cos Pi): " (cos (symbol "pi")))))
-
-     (set! (.-my_alert_again js/window) my-alert-again)
+      (set! (.-my_alert_again js/window) my-alert-again)
     </script>
 
   </head>
+
   <body>
-    <h1>Scittle</h1>
+    <h1>Emmy test with SCI and Cherry</h1>
 
     <button onclick="my_alert()">
-      Click me!
+      Click SCI
     </button>
 
     <button onclick="my_alert_again()">
-        Click me again!
+        Click Cherry
     </button>
-
 
   </body>
 </html>
