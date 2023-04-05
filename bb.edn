@@ -16,7 +16,7 @@
 
   shadow:watch {:doc "Development build. Starts webserver and watches for changes."
                 :task (clojure {:extra-env {"SCI_ELIDE_VARS" "true"}}
-                       "-M:dev -m shadow.cljs.devtools.cli watch main")}
+                               "-M:dev -m shadow.cljs.devtools.cli watch main")}
 
   http-server {:doc "Starts http server for serving static files"
                :requires ([babashka.http-server :as http])
@@ -36,6 +36,10 @@
   prod {:doc "Builds production artifacts."
         :task (clojure {:extra-env {"SCI_ELIDE_VARS" "true"}}
                        "-M:dev -m shadow.cljs.devtools.cli release main")}
+
+  sciweb {:doc "Builds production artifacts."
+          :task (clojure {:extra-env {"SCI_ELIDE_VARS" "true"}}
+                         "-M:dev -m shadow.cljs.devtools.cli release sciweb")}
 
   dist {:doc "Prepare dist folder for npm package"
         :depends [prod]

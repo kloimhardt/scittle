@@ -5,7 +5,16 @@
  {8000 "classpath:public"}
 
  :builds
- {:main
+ {:sciweb
+  {:target     :browser
+   :modules
+   {:sci-web.cherry-embed {:entries [scittle.cherry-embed]}
+    :sci-web.emmy-cherry {:entries [scittle.emmy-cherry]
+                          :depends-on #{:sci-web.cherry-embed}}}
+   :build-hooks [(shadow.cljs.build-report/hook)]
+   :output-dir "resources/public/js"
+   :devtools   {:repl-pprint true}}
+  :main
   {:target     :browser
    :js-options
    {:resolve {"react" {:target :global
@@ -13,24 +22,24 @@
               "react-dom" {:target :global
                            :global "ReactDOM"}}}
    :modules
-   {:sci-web {:entries [scittle.core]}
+   {:scittle {:entries [scittle.core]}
     :scittle.nrepl {:entries [scittle.nrepl]
-                    :depends-on #{:sci-web}}
+                    :depends-on #{:scittle}}
     :scittle.promesa {:entries [scittle.promesa]
-                      :depends-on #{:sci-web}}
+                      :depends-on #{:scittle}}
     :scittle.pprint {:entries [scittle.pprint]
-                     :depends-on #{:sci-web}}
+                     :depends-on #{:scittle}}
     :scittle.reagent {:entries [scittle.reagent]
-                      :depends-on #{:sci-web}}
+                      :depends-on #{:scittle}}
     :scittle.re-frame {:entries [scittle.re-frame]
                        :depends-on #{:scittle.reagent
-                                     :sci-web}}
+                                     :scittle}}
     :scittle.cljs-ajax {:entries [scittle.cljs-ajax]
-                        :depends-on #{:sci-web}}
-    :sci-web.emmy-sci {:entries [scittle.emmy-sci]
-                       :depends-on #{:sci-web}}
+                        :depends-on #{:scittle}}
+    :scittle.emmy-inter {:entries [scittle.emmy-inter]
+                         :depends-on #{:scittle}}
     :sci-web.emmy-cherry {:entries [scittle.emmy-cherry]
-                          :depends-on #{:sci-web}}}
+                          :depends-on #{:scittle}}}
 
    :build-hooks [(shadow.cljs.build-report/hook)]
    :output-dir "resources/public/js"

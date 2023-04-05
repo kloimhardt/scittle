@@ -1,4 +1,4 @@
-(ns scittle.emmy-sci
+(ns scittle.emmy-inter
   (:require
    [emmy.env]
    [sci.core :as sci]

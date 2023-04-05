@@ -1,6 +1,6 @@
 (ns scittle.emmy-cherry
   (:require
    [emmy.env]
-   [cherry.embed :as cherry]))
+   [cherry.embed]))
 
-(cherry/preserve-ns 'emmy.env)
+(cherry.embed/preserve-ns 'emmy.env)
