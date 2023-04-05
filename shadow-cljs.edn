@@ -9,7 +9,7 @@
   {:target     :browser
    :modules
    {:sci-web.cherry-embed {:entries [scittle.cherry-embed]}
-    :sci-web.emmy-cherry {:entries [scittle.emmy-cherry]
+    :sci-web.emmy {:entries [scittle.emmy-cherry]
                           :depends-on #{:sci-web.cherry-embed}}}
    :build-hooks [(shadow.cljs.build-report/hook)]
    :output-dir "resources/public/js"
