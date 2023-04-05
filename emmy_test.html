@@ -4,34 +4,33 @@
     <script src="resources/public/js/sci-web.js"
             type="application/javascript"></script>
 
-    <script src="resources/public/js/scittle.emmy.js"
+    <script src="sci-web.emmy.js"
             type="application/javascript"></script>
-
-    <script type="application/x-scittle-fork">
-      (defn my-alert []
-          (js/alert (str "You clicked Pi: " (emmy.env/tex$ (symbol "pi")))))
-
-      (set! (.-my_alert js/window) my-alert)
-    </script>
-
-    <script type="application/x-cherry">
-      (defn my-alert-again []
-          (js/alert (str "You clicked Pi again: " (emmy.env/tex$ (symbol "pi")))))
-
-      (set! (.-my_alert_again js/window) my-alert-again)
-    </script>
-
   </head>
 
   <body>
     <h1>Emmy test with SCI and Cherry</h1>
 
-    <button onclick="my_alert()">
-      Click SCI
+    <script type="application/x-cherry">
+     (defn my-alert []
+         (js/alert (str "You clicked Cherry Pi: " (emmy.env/tex$ (symbol "pi")))))
+
+     (set! (.-my_alert_cherry js/window) my-alert)
+    </script>
+
+    <button onclick="my_alert_cherry()">
+        Click Cherry
     </button>
 
-    <button onclick="my_alert_again()">
-        Click Cherry
+    <script type="application/x-scittle-fork">
+     (defn my-alert []
+         (js/alert (str "You clicked SCI Pi: " (emmy.env/tex$ (symbol "pi")))))
+
+     (set! (.-my_alert_sci js/window) my-alert)
+    </script>
+
+    <button onclick="my_alert_sci()">
+        Click SCI
     </button>
 
   </body>

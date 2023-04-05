@@ -27,8 +27,8 @@
                                      :sci-web}}
     :scittle.cljs-ajax {:entries [scittle.cljs-ajax]
                         :depends-on #{:sci-web}}
-    :scittle.emmy {:entries [scittle.emmy]
-                        :depends-on #{:sci-web}}}
+    :sci-web.emmy {:entries [scittle.emmy]
+                   :depends-on #{:sci-web}}}
    :build-hooks [(shadow.cljs.build-report/hook)]
    :output-dir "resources/public/js"
    :devtools   {:repl-pprint true}}}}
