@@ -13,22 +13,22 @@
               "react-dom" {:target :global
                            :global "ReactDOM"}}}
    :modules
-   {:scittle {:entries [scittle.core]}
+   {:sci-web {:entries [scittle.core]}
     :scittle.nrepl {:entries [scittle.nrepl]
-                    :depends-on #{:scittle}}
+                    :depends-on #{:sci-web}}
     :scittle.promesa {:entries [scittle.promesa]
-                      :depends-on #{:scittle}}
+                      :depends-on #{:sci-web}}
     :scittle.pprint {:entries [scittle.pprint]
-                     :depends-on #{:scittle}}
+                     :depends-on #{:sci-web}}
     :scittle.reagent {:entries [scittle.reagent]
-                      :depends-on #{:scittle}}
+                      :depends-on #{:sci-web}}
     :scittle.re-frame {:entries [scittle.re-frame]
                        :depends-on #{:scittle.reagent
-                                     :scittle}}
+                                     :sci-web}}
     :scittle.cljs-ajax {:entries [scittle.cljs-ajax]
-                        :depends-on #{:scittle}}
+                        :depends-on #{:sci-web}}
     :scittle.emmy {:entries [scittle.emmy]
-                        :depends-on #{:scittle}}}
+                        :depends-on #{:sci-web}}}
    :build-hooks [(shadow.cljs.build-report/hook)]
    :output-dir "resources/public/js"
    :devtools   {:repl-pprint true}}}}

@@ -1,16 +1,16 @@
 (ns scittle.emmy
   (:require
-   [sicmutils.env]
+   [emmy.env]
    [sci.core :as sci]
-   #_[cherry.embed :as cherry]
+   [cherry.embed :as cherry]
    [scittle.core :as scittle]))
 
-#_(cherry/preserve-ns 'sicmutils.env)
+(cherry/preserve-ns 'emmy.env)
 
-(def emmy-env-ns (sci/create-ns 'sicmutils.env nil))
+(def emmy-env-ns (sci/create-ns 'emmy.env nil))
 
 (def emmy-namespace
-  (sci/copy-ns sicmutils.env emmy-env-ns))
+  (sci/copy-ns emmy.env emmy-env-ns))
 
 (def namespaces
   {'emmy.env emmy-namespace})
