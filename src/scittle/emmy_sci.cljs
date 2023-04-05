@@ -1,11 +1,8 @@
-(ns scittle.emmy
+(ns scittle.emmy-sci
   (:require
    [emmy.env]
    [sci.core :as sci]
-   [cherry.embed :as cherry]
    [scittle.core :as scittle]))
-
-(cherry/preserve-ns 'emmy.env)
 
 (def emmy-env-ns (sci/create-ns 'emmy.env nil))
 

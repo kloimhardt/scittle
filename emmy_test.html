@@ -4,13 +4,22 @@
     <script src="resources/public/js/sci-web.js"
             type="application/javascript"></script>
 
-    <script src="resources/public/js/sci-web.emmy.js"
+    <script src="resources/public/js/sci-web.emmy-sci.js"
             type="application/javascript"></script>
+
+    <script src="resources/public/js/sci-web.emmy-cherry.js"
+            type="application/javascript"></script>
+
 <!--
-     <script src="sci-web.emmy.js"
+     <script src="sci-web.emmy-cherry.js"
      type="application/javascript"></script>
 
 -->
+
+  </head>
+
+  <body>
+    <h1>Emmy test with SCI and Cherry</h1>
 
     <script type="application/x-cherry">
      (defn my-alert []
@@ -18,11 +27,6 @@
 
      (set! (.-my_alert_cherry js/window) my-alert)
     </script>
-
-  </head>
-
-  <body>
-    <h1>Emmy test with SCI and Cherry</h1>
 
     <button onclick="my_alert_cherry()">
         Click Cherry
