@@ -1,6 +1,5 @@
 (ns scittle.cherry-embed
-  (:require
-   [cherry.embed]))
+  (:require [goog.string]
+            [clojure.string :as st]))
 
-(cherry.embed/preserve-ns 'cljs.core)
-(.log js/console (cherry.embed/eval-string "(+ 1 1)"))
+(.log js/console (st/upper-case "hello world"))

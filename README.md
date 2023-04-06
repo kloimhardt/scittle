@@ -10,6 +10,8 @@ Clean and build:
 
 open in browser: emmy_test.html
 
+emmy.env.tex$(cherry.embed.eval_string("(symbol 'pi')"))
+
 Both buttons work. 
 
 Now rebuild.

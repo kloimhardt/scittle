@@ -105,7 +105,7 @@
         (.send req)))))
 
 (cherry.embed/preserve-ns 'cljs.core)
-(cherry.embed/preserve-ns 'cherry.embed)
+;; (cherry.embed/preserve-ns 'cherry.embed)
 
 (defn- eval-cherry-script-tags* [script-tags]
   (when-let [tag (first script-tags)]

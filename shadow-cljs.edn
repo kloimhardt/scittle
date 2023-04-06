@@ -8,12 +8,11 @@
  {:sciweb
   {:target     :browser
    :modules
-   {:sci-web.cherry-embed {:entries [scittle.cherry-embed]}
-    :sci-web.emmy {:entries [scittle.emmy-cherry]
-                          :depends-on #{:sci-web.cherry-embed}}}
-   :build-hooks [(shadow.cljs.build-report/hook)]
+   {:sci-web {:entries [scittle.cherry-embed]}
+    :sci-web.emmy {:entries [scittle.emmy]
+                   :depends-on #{:sci-web}}}
    :output-dir "resources/public/js"
-   :devtools   {:repl-pprint true}}
+   :optimizations :whitespace}
   :main
   {:target     :browser
    :js-options
@@ -38,7 +37,7 @@
                         :depends-on #{:scittle}}
     :scittle.emmy-inter {:entries [scittle.emmy-inter]
                          :depends-on #{:scittle}}
-    :sci-web.emmy-cherry {:entries [scittle.emmy-cherry]
+    :scittle.emmy-cherry {:entries [scittle.emmy-cherry]
                           :depends-on #{:scittle}}}
 
    :build-hooks [(shadow.cljs.build-report/hook)]
