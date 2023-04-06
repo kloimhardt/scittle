@@ -6,7 +6,8 @@
             [sci.core :as sci]
             [sci.impl.unrestrict]
             [scittle.impl.common :refer [cljns]]
-            [scittle.impl.error :as error]))
+            [scittle.impl.error :as error]
+            [cherry.embed :as cherry]))
 
 (set! sci.impl.unrestrict/*unrestricted* true)
 
@@ -86,9 +87,42 @@
                                     (eval-script-tags* (rest script-tags)))))]
         (.send req)))))
 
-(defn ^:export eval-script-tags []
+(defn- eval-cherry-script-tags* [script-tags]
+  (when-let [tag (first script-tags)]
+    (if-let [text (not-empty (gobject/get tag "textContent"))]
+      (let [scittle-id (str (gensym "scittle-tag-"))]
+        (gobject/set tag "scittle_id" scittle-id)
+        (swap! !sci-ctx assoc-in [:src scittle-id] text)
+        #_(sci/binding [sci/file scittle-id]
+            (eval-string-cherry text))
+        (cherry/eval-string text)
+        (eval-cherry-script-tags* (rest script-tags)))
+      (let [src (.getAttribute tag "src")
+            req (js/XMLHttpRequest.)
+            _ (.open req "GET" src true)
+            _ (gobject/set req "onload"
+                           (fn [] (this-as this
+                                           (let [response (gobject/get this "response")]
+                                             (gobject/set tag "scittle_id" src)
+                                      ;; save source for error messages
+                                             (swap! !sci-ctx assoc-in [:src src] response)
+                                             #_(sci/binding [sci/file src]
+                                                 (eval-string-cherry response))
+                                             (cherry/eval-string response))
+                                           (eval-cherry-script-tags* (rest script-tags)))))]
+        (.send req)))))
+
+#_(defn ^:export eval-script-tags []
   (let [script-tags (js/document.querySelectorAll "script[type='application/x-scittle']")]
     (eval-script-tags* script-tags)))
+
+(cherry.embed/preserve-ns 'cljs.core)
+
+(defn ^:export eval-script-tags []
+  (let [script-tags (js/document.querySelectorAll "script[type='application/x-scittle-fork']")
+        cherry-script-tags (js/document.querySelectorAll "script[type='application/x-cherry']")]
+    (eval-script-tags* script-tags)
+    (eval-cherry-script-tags* cherry-script-tags)))
 
 (def auto-load-disabled? (volatile! false))
 

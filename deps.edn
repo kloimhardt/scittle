@@ -19,7 +19,12 @@
   io.github.babashka/sci.configs
   #_{:local/root "/Users/borkdude/dev/sci.configs"}
   {:git/url "https://github.com/babashka/sci.configs"
-   :git/sha "bf8d209e4aeabb92cb1be04e3d8f789583d5f449"}}
+   :git/sha "bf8d209e4aeabb92cb1be04e3d8f789583d5f449"}
+  io.github.squint-cljs/squint
+  {:git/sha "736811204175034b10a63d561ae3b4d80f09cc9b"}
+  io.github.squint-cljs/cherry
+  {:git/sha "4e948708cb20ab0a1a892c30fe87842a2efcc380"}}
+
  :aliases
  {:dev
   {:extra-paths ["dev"]
