@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+           <script src="resources/public/js/scittle.js"
+           type="application/javascript"></script>
+
+           <script src="resources/public/js/scittle.emmy-inter.js"
+           type="application/javascript"></script>
+
+           <script src="resources/public/js/scittle.emmy-cherry.js"
+           type="application/javascript"></script>
+
+  </head>
+
+  <body>
+
+    <h1>Emmy test with SCI and Cherry</h1>
+
+    <script type="application/x-cherry">
+     (defn my-alert []
+         (js/alert (str "You clicked Cherry Pi: " (emmy.env/tex$ (symbol "pi")))))
+
+     (set! (.-my_alert_cherry js/window) my-alert)
+    </script>
+
+    <button onclick="my_alert_cherry()">
+        Click Cherry
+    </button>
+
+         <script type="application/x-scittle-fork">
+         (defn my-alert []
+         (js/alert (str "You clicked SCI Pi: " (emmy.env/tex$ (symbol "pi")))))
+
+         (set! (.-my_alert_sci js/window) my-alert)
+         </script>
+
+         <button onclick="my_alert_sci()">
+         Click SCI
+         </button>
+
+     </body>
+</html>
