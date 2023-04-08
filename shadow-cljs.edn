@@ -5,7 +5,18 @@
  {8000 "classpath:public"}
 
  :builds
- {:main
+ {:sciweb
+  {:target :browser
+   :compiler-options {:optimizations :advanced
+                      :output-wrapper true
+                      :rename-prefix-namespace "SW"
+                      :source-map false}
+   :modules
+   {:sci-web {:entries [scittle.cherry-embed]}
+    :sci-web.emmy {:entries [scittle.emmy]
+                   :depends-on #{:sci-web}}}
+   :output-dir "resources/public/js"}
+  :main
   {:target     :browser
    :js-options
    {:resolve {"react" {:target :global

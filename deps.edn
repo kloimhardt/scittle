@@ -20,6 +20,8 @@
   #_{:local/root "/Users/borkdude/dev/sci.configs"}
   {:git/url "https://github.com/babashka/sci.configs"
    :git/sha "bf8d209e4aeabb92cb1be04e3d8f789583d5f449"}
+  io.github.mentat-collective/emmy
+  {:git/sha "ac6e444abe626d044beb14a5ef7417f65ba556d8"}
   io.github.squint-cljs/squint
   {:git/sha "736811204175034b10a63d561ae3b4d80f09cc9b"}
   io.github.squint-cljs/cherry

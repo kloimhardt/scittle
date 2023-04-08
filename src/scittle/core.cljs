@@ -116,7 +116,7 @@
   (let [script-tags (js/document.querySelectorAll "script[type='application/x-scittle']")]
     (eval-script-tags* script-tags)))
 
-(cherry.embed/preserve-ns 'cljs.core)
+;; (cherry.embed/preserve-ns 'cljs.core) ;;embedding core is not necessary
 
 (defn ^:export eval-script-tags []
   (let [script-tags (js/document.querySelectorAll "script[type='application/x-scittle-fork']")
