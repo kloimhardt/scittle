@@ -37,10 +37,7 @@
         :task (clojure {:extra-env {"SCI_ELIDE_VARS" "true"}}
                        "-M:dev -m shadow.cljs.devtools.cli release main")}
 
-  sciweb {:doc "Builds production artifacts."
-          :task (clojure "-M:dev -m shadow.cljs.devtools.cli release sciweb")}
-
-  dist {:doc "Prepare dist folder for npm package"
+    dist {:doc "Prepare dist folder for npm package"
         :depends [prod]
         :task (do
                 (fs/delete-tree "dist")

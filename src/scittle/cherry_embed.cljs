@@ -4,4 +4,4 @@
             [clojure.string :as st]))
 
 (cherry.embed/preserve-ns 'cljs.core)
-(.log js/console (st/upper-case "hello world"))
+(.log js/console (st/upper-case "Cherry enabled"))

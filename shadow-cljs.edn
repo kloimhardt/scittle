@@ -5,19 +5,7 @@
  {8000 "classpath:public"}
 
  :builds
- {:sciweb
-  {:target     :browser
-   :compiler-options {:optimizations :advanced
-                      :output-wrapper true
-                      :rename-prefix-namespace "SW"
-                      :source-map false}
-   :modules
-   {:sci-web {:entries [scittle.cherry-embed]}
-    :sci-web.emmy {:entries [scittle.emmy]
-                   :depends-on #{:sci-web}}}
-   :output-dir "resources/public/js"
-   :optimizations :whitespace}
-  :main
+ {:main
   {:target     :browser
    :js-options
    {:resolve {"react" {:target :global
@@ -39,6 +27,8 @@
                                      :scittle}}
     :scittle.cljs-ajax {:entries [scittle.cljs-ajax]
                         :depends-on #{:scittle}}
+    :scittle.cherry-embed {:entries [scittle.cherry-embed]
+                         :depends-on #{:scittle}}
     :scittle.emmy-inter {:entries [scittle.emmy-inter]
                          :depends-on #{:scittle}}
     :scittle.emmy-cherry {:entries [scittle.emmy-cherry]
